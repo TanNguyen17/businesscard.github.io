@@ -10,6 +10,7 @@
 
 body {
     min-height: 100vh;
+    max-width: 100vw;
     background-color: #211951;
     display: flex;
     flex-direction: column;
@@ -18,20 +19,18 @@ body {
     margin: 0px;
 }
 .container {
-    display: flex;
     height: var(--card-height);
     width: var(--card-width);
     position: relative;
-    flex-direction: column;
-    border: darkblue 1px solid;
-    background-color: whitesmoke;
-    border-radius: 10px;
-    align-items: center;
+    /* border: darkblue 1px solid;
+    background-color: whitesmoke; */
+    border-radius: 2em;
+    /* align-items: center;
     justify-content: center;
-    text-align: center;
-    cursor: pointer;
+    text-align: center; */
     font-size: 1.5em;
     padding: 5px;
+    perspective: 800px;
 }
 
 .container::before {
@@ -39,7 +38,7 @@ body {
     width: 104%;
     height: 102%;
     border-radius: 8px;
-    background-image: linear-gradient(var(--rotate), #836FFF, #15F5BA 43%, #F0F3FF);
+    background-image: linear-gradient(var(--rotate), #836FFF, #15F5BA 20%, #F0F3FF);
     position: absolute;
     z-index: -1;
     top: -1%;
@@ -59,10 +58,10 @@ body {
     margin: 0 auto;
     transform: scale(0.8);
     filter: blur(calc(var(--card-height) / 6));
-    background-image: linear-gradient(var(--rotate), #836FFF, #15F5BA 43%, #F0F3FF);
+    background-image: linear-gradient(var(--rotate), #836FFF 80%, #15F5BA, #F0F3FF);
     opacity: 1;
     transition: opacity .5s;
-    animation: spin 2.5s linear infinite;
+    animation: spin 4s linear infinite;
 }
 
 @keyframes spin {
@@ -75,13 +74,45 @@ body {
     }
 }
 
-.business-card {
+.container:hover > .card {
+    cursor: pointer;
+    transform: rotateY(180deg);
+}
 
+.card {
+    transition: transform 1500ms;
+    transform-style: preserve-3d;
+}
+
+.business-card-front {
+    background-color: #000054;
+}
+
+.business-card-front {
+    display: flex;
     height: var(--card-height);
     width: var(--card-width);
+    position: absolute;
+    backface-visibility: hidden;
+    text-align: center;
+    justify-content: center;
     align-items: center;
+}
+
+.business-card {
+    height: var(--card-height);
+    width: var(--card-width);
     flex-direction: column;
-    padding: 2vh;
+    padding: 20px 0px;
+    position: absolute;
+    backface-visibility: hidden;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.business-card {
+    transform: rotateY(180deg);
 }
 
 .business-card #rmit-logo {
@@ -125,7 +156,7 @@ body {
 }
 
 #intro {
-    font-size: 4vh;
+    font-size: 6vh;
     color: white;
     text-decoration: none;
     font-weight: bold;
